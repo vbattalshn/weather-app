@@ -5,7 +5,7 @@
     --color-3: hsl(0, 0%, 40%);
     --border-color: hsl(0, 0%, 88%);
     --card-background: hsl(0, 0%, 93%);
-    --card-boxshadow: 0 0 30px 0 hsla(0, 0%, 50%, 0.251);
+    --card-boxshadow: 0 0 30px 0 hsla(0, 0%, 50%, 0.10);
     --text-shadow: 0px 3px 3px hsla(0, 0%, 13%, 0.251);
 }
 
@@ -16,7 +16,7 @@
     --color-3: hsl(0, 0%, 60%);
     --border-color: hsl(0, 0%, 12%);
     --card-background: hsl(0, 0%, 7%);
-    --card-boxshadow: 0 0 30px 0 hsla(0, 0%, 0%, 0.251);
+    --card-boxshadow: 0 0 30px 0 hsla(0, 0%, 0%, 0.10);
     --text-shadow: 0px 3px 3px hsla(0, 0%, 87%, 0.251);
 }
 
@@ -84,7 +84,7 @@ header {
 }
 
 .icon svg {
-    font-size: 2.5rem;
+    font-size: 2rem;
     height: 1em;
     width: 1em;
     vertical-align: middle;
@@ -273,3 +273,63 @@ footer {
     font-weight: 300;
     font-size: 1rem;
 }
+
+.search-input-holder{
+    width: 90%;
+    margin: 10px auto;
+    display: flex;
+    background: var(--card-background);
+    padding: 5px;
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    box-shadow: var(--card-boxshadow);
+}
+
+.search-input{
+    width: 100%;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-2);
+    background: transparent;
+}
+
+.search-input:focus{
+    outline: 0;
+}
+
+.input-icon{
+    padding: 0 5px;
+}
+
+.search-result-holder{
+    width: 90%;
+    margin: 20px auto;
+    border-radius: 20px;
+    background: var(--card-background);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--card-boxshadow);
+}
+
+.search-result{
+    width: 100%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;   
+    border-bottom: 1px solid var(--border-color);
+    user-select: none;
+    cursor: pointer;
+}
+
+.search-result:last-child{
+    border-bottom: none;
+}
+
+/*
+<div class="search-result-holder">
+    <span class="search-result"> İstanbul, Istanul / Tr</span>
+    <span class="search-result"> İstanbul, Istanul / Tr</span>
+    <span class="search-result"> İstanbul, Istanul / Tr</span>
+    <span class="search-result"> İstanbul, Istanul / Tr</span>
+</div>
+*/

@@ -1,6 +1,6 @@
 <template>
   <section >
-    <Header :location=" location.locationName " />
+    <Header page="home" :location=" location.locationName " />
     <div v-if="weather.hourData && weather.fiveDayData" class="content fullheight centerpage">
       <div class="temperature-holder">
         <span class="value">{{ weather.hourData.Temperature.Value }}°C</span>

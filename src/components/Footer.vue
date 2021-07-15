@@ -4,14 +4,20 @@
     <span class="line"></span>
     <span class="feature">Api By <a href="https://www.accuweather.com/" target="_blank" rel="noopener noreferrer">AccuWeather</a></span>
     <div class="version">
-      Version: 0.1.0
+      Version: {{ version }}
     </div>
   </footer>
 </template>
 
 <script>
-export default {
+import { version } from "../../package.json"
 
+export default {
+  data(){
+    return{
+      version: version
+    }
+  }
 }
 </script>
 
