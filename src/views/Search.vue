@@ -1,6 +1,6 @@
 <template>
   <section>
-    <Header page="search" :location=" location.locationName " />
+    <Header page="search" location="Search" />
     <div class="content basepage fullheight">
       <div class="search-input-holder">
         <span class="icon input-icon">

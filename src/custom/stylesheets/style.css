@@ -38,14 +38,17 @@
 
 body {
     background: var(--background);
-    font-size: 16px;
     overflow: none
 }
 
 html {
     overflow-x: none;
-    scroll-behavior: smooth
+    scroll-behavior: smooth;
+    font-size: 16px;
 }
+
+@media screen and (max-width: 768px) { html {font-size: 15px}}
+@media screen and (max-width: 465px) { html {font-size: 14px}}
 
 .fullpage {
     min-width: 100%;
@@ -104,6 +107,8 @@ header {
 
 nav ul {
     list-style: none;
+    display: flex;
+    gap: 5px
 }
 
 footer {
@@ -216,18 +221,6 @@ footer {
     color: var(--color-2);
 }
 
-@media screen and (max-width: 768px) {
-    body {
-        font-size: 14px;
-    }
-}
-
-@media screen and (max-width: 465px) {
-    body {
-        font-size: 12px;
-    }
-}
-
 @media screen and (max-width: 400px) {
     .day {
         width: calc(300px / 5);
@@ -325,11 +318,8 @@ footer {
     border-bottom: none;
 }
 
-/*
-<div class="search-result-holder">
-    <span class="search-result"> İstanbul, Istanul / Tr</span>
-    <span class="search-result"> İstanbul, Istanul / Tr</span>
-    <span class="search-result"> İstanbul, Istanul / Tr</span>
-    <span class="search-result"> İstanbul, Istanul / Tr</span>
-</div>
-*/
+.mode-icon svg{
+    width: calc(2rem - 2px);
+    height: calc(2rem - 2px);
+    fill: var(--color-2);
+}
