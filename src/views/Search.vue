@@ -1,6 +1,6 @@
 <template>
   <section>
-    <Header page="search" location="Search" />
+    <Header page="Search" :location="false" />
     <div class="content basepage fullheight">
       <div class="search-input-holder">
         <span class="icon input-icon">
@@ -9,10 +9,11 @@
             <path fill-rule="evenodd" clip-rule="evenodd" d="M24.999 43.75C22.5022 43.75 9.375 33.1216 9.375 22.0069C9.375 13.3055 16.369 6.25 24.999 6.25C33.629 6.25 40.625 13.3055 40.625 22.0069C40.625 33.1216 27.4958 43.75 24.999 43.75Z" stroke="#222222" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </span>
-        <input type="text" id="search" class="search-input" placeholder="Search Location" v-model="searchValue" v-on:keyup="autoComplete">
+        <input autocomplete="location" type="text" id="search" class="search-input" placeholder="Search Location" v-model="searchValue" v-on:keyup="autoComplete">
       </div>
       <div v-if="searchResult" class="search-result-holder">
-        <span v-for="(search, index) in searchResult" :key="index" class="search-result" v-on:click="changeLocation(search.Key, search.LocalizedName )" > {{ search.LocalizedName }} / {{ search.Country.LocalizedName }}</span>
+        <span v-if="searchResult.length == 0" class="search-result no-result">No Result Found</span>
+        <span v-else v-for="(search, index) in searchResult" :key="index" class="search-result" v-on:click="changeLocation(search.Key, search.LocalizedName )" > {{ search.LocalizedName }} / {{ search.Country.LocalizedName }}</span>
       </div>
     </div>
     <Footer />

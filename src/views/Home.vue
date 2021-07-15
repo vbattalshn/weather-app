@@ -1,6 +1,6 @@
 <template>
   <section >
-    <Header page="home" :location=" location.locationName " />
+    <Header page="Home" :location=" location.locationName " />
     <div v-if="weather.hourData && weather.fiveDayData" class="content fullheight centerpage">
       <div class="temperature-holder">
         <span class="value">{{ weather.hourData.Temperature.Value }}°C</span>
@@ -45,10 +45,12 @@ export default{
     if(!this.location.locationKey && !this.location.locationName){
       this.getIpAddress(true);
     }else{
-      this.weather.hourData = null;
-      this.weather.fiveDayData = null;
-      this.getWeatherData();
-      this.get5DayWeatherData();
+      if(this.weather.hourData.Link.search(this.location.locationKey) == -1){
+        this.weather.hourData = null;
+        this.weather.fiveDayData = null;
+        this.getWeatherData();
+        this.get5DayWeatherData();
+      }
     }
   },
   methods: {

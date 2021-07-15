@@ -108,7 +108,7 @@ header {
 nav ul {
     list-style: none;
     display: flex;
-    gap: 5px
+    gap: 10px
 }
 
 footer {
@@ -312,6 +312,7 @@ footer {
     border-bottom: 1px solid var(--border-color);
     user-select: none;
     cursor: pointer;
+    color: var(--color-2)
 }
 
 .search-result:last-child{
@@ -322,4 +323,18 @@ footer {
     width: calc(2rem - 2px);
     height: calc(2rem - 2px);
     fill: var(--color-2);
+    vertical-align: middle;
+}
+
+input:-webkit-autofill{
+    background: transparent;
+}
+
+input:autofill{
+    background: transparent;
+}
+
+.no-result{
+    cursor: context-menu;
+    user-select: auto;
 }

@@ -7,7 +7,8 @@
           <path fill-rule="evenodd" clip-rule="evenodd" d="M24.999 43.75C22.5022 43.75 9.375 33.1216 9.375 22.0069C9.375 13.3055 16.369 6.25 24.999 6.25C33.629 6.25 40.625 13.3055 40.625 22.0069C40.625 33.1216 27.4958 43.75 24.999 43.75Z" stroke="#222222" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
         </svg>
       </div>
-      <a :href="'https://www.google.com/maps/place/' + location" rel="noopener noreferrer" target="_blank" class="location" v-text="location"></a>
+      <a v-if="location" :href="'https://www.google.com/maps/place/' + location" rel="noopener noreferrer" target="_blank" class="location" v-text="location"></a>
+      <router-link class="location" v-else to="/" v-text="page"></router-link>
     </div>
     <nav>
       <ul>
@@ -23,7 +24,7 @@
             </span>
           </a>
         </li>
-        <li v-if='page != "home"'>
+        <li v-if='page != "Home"'>
           <router-link to="/">
             <span class="icon home-icon">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
