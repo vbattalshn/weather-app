@@ -45,9 +45,12 @@ export default{
     if(!this.location.locationKey && !this.location.locationName){
       this.getIpAddress(true);
     }else{
-      if(this.weather.hourData.Link.search(this.location.locationKey) == -1){
+      if(this.weather.hourData != null && this.weather.hourData.Link.search(this.location.locationKey) == -1){
         this.weather.hourData = null;
         this.weather.fiveDayData = null;
+        this.getWeatherData();
+        this.get5DayWeatherData();
+      }else{
         this.getWeatherData();
         this.get5DayWeatherData();
       }

@@ -1,14 +1,16 @@
-import axios from 'axios'
 import Vue from 'vue'
 import Vuex from 'vuex'
+import VueCookies from 'vue-cookies'
 
-Vue.use(Vuex)
+Vue.use(Vuex, VueCookies)
 
 export default new Vuex.Store({
   state: {
     location: {
-      locationKey: null,
-      locationName: null
+      locationKey: $cookies.get("locationKey") ? $cookies.get("locationKey") : null,
+      locationName: $cookies.get("locationName") ? $cookies.get("locationName") : null,
+      latitude: null,
+      longitude: null
     },
     user: {
       ipAddress: null
@@ -19,7 +21,7 @@ export default new Vuex.Store({
       msg: "" 
     },
     api: {
-      apiKey: "sVGnTOI8qRVIgjTzt8OAgM9WixCwo8j0",
+      apiKey: "ZSPWS7OOvAa3In2dJcoIdAU2Lu6LdANG",
       lang: "en-en"
     },
     weather: {

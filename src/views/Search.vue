@@ -45,7 +45,9 @@ export default {
   methods: {
     changeLocation: function (Key ,LocalizedName){
       this.location.locationKey = Key,
-      this.location.locationName = LocalizedName
+      this.location.locationName = LocalizedName,
+      this.$cookies.set("locationKey", Key),
+      this.$cookies.set("locationName", LocalizedName),
       this.$router.push('/') 
     },
     autoComplete: function(){
