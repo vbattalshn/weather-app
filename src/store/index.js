@@ -21,7 +21,7 @@ export default new Vuex.Store({
       msg: "" 
     },
     api: {
-      apiKey: "OfOpejTyiMdmdBtSUooALkXf3sg8P9gz",
+      apiKey: "zhmAC6aRSV8PKfy1stfVA9Nyo0cGjWRG",
       lang: "en-en"
     },
     weather: {

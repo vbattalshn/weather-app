@@ -25,6 +25,7 @@ import store from "../store"
 import Footer from "../components/Footer"
 import Header from "../components/Header"
 import axios from 'axios'
+import Vue from 'vue'
 
 export default {
   components: {Footer, Header},
@@ -48,14 +49,18 @@ export default {
       this.location.locationName = LocalizedName,
       this.$cookies.set("locationKey", Key),
       this.$cookies.set("locationName", LocalizedName),
-      this.$router.push('/') 
+      this.$notify({type: "success", text: "Location changed"})
+      this.$router.push('/')
     },
     autoComplete: function(){
-      if(this.searchValue.length >= 3){
+      if(this.searchValue != null && this.searchValue.length >= 3){
         axios
           .get("http://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=" + this.api.apiKey + "&language=" + this.api.lang + "&q=" + this.searchValue)        
           .then((Response) => {
             this.searchResult = Response.data
+          })
+          .catch((error) => {
+            this.$notify({type: "error", text: error})
           })
       }
     }

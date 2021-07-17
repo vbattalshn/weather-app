@@ -1,7 +1,8 @@
 <template>
   <div id="app" class="basepage">
     <router-view/>
-    <vue-progress-bar></vue-progress-bar>
+    <vue-progress-bar />
+    <notifications classes="my-notification" position="right bottom" />
   </div>
 </template>
 

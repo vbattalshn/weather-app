@@ -64,6 +64,10 @@ export default{
           this.user.ipAddress = Response.data.ip;
           if(param){this.getLocation()}
         })
+        .catch((error) => {
+          this.$notify({type: "error", text: "Location not deceted"})
+        })
+
     },
     getLocation(){
       axios
@@ -74,6 +78,9 @@ export default{
           this.getWeatherData();
           this.get5DayWeatherData();
         })
+        .catch((error) => {
+          this.$notify({type: "error", text: error})
+        })
     },
     getWeatherData(){
       axios
@@ -81,12 +88,18 @@ export default{
         .then((Response) => {
           this.weather.hourData = Response.data[0];
         })
+        .catch((error) => {
+          this.$notify({type: "error", text: error})
+        })
     },
     get5DayWeatherData(){
       axios
         .get("http://dataservice.accuweather.com/forecasts/v1/daily/5day/" + this.location.locationKey + "?apikey=" + this.api.apiKey + "&language=" + this.api.lang + "&details=false&metric=true")
         .then((Response) => {
           this.weather.fiveDayData = Response.data;
+        })
+        .catch((error) => {
+          this.$notify({type: "error", text: error})
         })
     }
   }
