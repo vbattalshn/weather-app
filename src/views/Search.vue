@@ -9,7 +9,7 @@
             <path fill-rule="evenodd" clip-rule="evenodd" d="M24.999 43.75C22.5022 43.75 9.375 33.1216 9.375 22.0069C9.375 13.3055 16.369 6.25 24.999 6.25C33.629 6.25 40.625 13.3055 40.625 22.0069C40.625 33.1216 27.4958 43.75 24.999 43.75Z" stroke="#222222" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </span>
-        <input autocomplete="location" type="text" id="search" class="search-input" placeholder="Search Location" v-model="searchValue" v-on:keyup="autoComplete">
+        <input autocomplete="location" type="text" id="search" class="search-input" placeholder="Search Location" v-model="searchValue">
       </div>
       <div v-if="searchResult" class="search-result-holder">
         <span v-if="searchResult.length == 0" class="search-result no-result">No Result Found</span>
@@ -43,6 +43,20 @@ export default {
       return store.state.api
     }
   },
+  watch: {
+    searchValue(newSearch){
+      if(newSearch != null && newSearch.length >= 3){
+        axios
+          .get("http://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=" + this.api.apiKey + "&language=" + this.api.lang + "&q=" + newSearch)        
+          .then((Response) => {
+            this.searchResult = Response.data
+          })
+          .catch((error) => {
+            this.$notify({type: "error", text: error})
+          })
+      }
+    }
+  },
   methods: {
     changeLocation: function (Key ,LocalizedName){
       this.location.locationKey = Key,
@@ -52,18 +66,6 @@ export default {
       this.$notify({type: "success", text: "Location changed"})
       this.$router.push('/')
     },
-    autoComplete: function(){
-      if(this.searchValue != null && this.searchValue.length >= 3){
-        axios
-          .get("http://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=" + this.api.apiKey + "&language=" + this.api.lang + "&q=" + this.searchValue)        
-          .then((Response) => {
-            this.searchResult = Response.data
-          })
-          .catch((error) => {
-            this.$notify({type: "error", text: error})
-          })
-      }
-    }
   }
 }
 </script>
