@@ -269,7 +269,7 @@ footer {
 
 .search-input-holder{
     width: 90%;
-    margin: 10px auto;
+    margin: 0px auto;
     display: flex;
     background: var(--card-background);
     padding: 5px;
