@@ -1,7 +1,7 @@
 <template>
   <section >
     <Header page="Home" :location=" location.locationName " />
-    <div v-if="weather.hourData && weather.fiveDayData" class="content fullheight centerpage">
+    <div v-if="weather.hourData && weather.fiveDayData" class="content fullheight centerpage" id="content">
       <div class="temperature-holder">
         <span class="value">{{ weather.hourData.Temperature.Value }}°C</span>
         <span class="phrase">{{ weather.hourData.IconPhrase }}</span>
@@ -86,7 +86,6 @@ export default{
       axios
         .get("http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=" + this.api.apiKey + "&q=" + this.location.latitude + "," + this.location.longitude + "&language=" + this.api.lang + "&details=false&toplevel=false")
         .then((Response) => {
-          console.log(Response)
           this.location.locationKey = Response.data.Key,
           this.location.locationName = Response.data.LocalizedName
           this.getWeatherData();
@@ -128,24 +127,15 @@ export default{
       }
     },
     success(position){
-      console.log(position);
       this.location.latitude = position.coords.latitude;
       this.location.longitude = position.coords.longitude;
       this.getMeridianLocation();
     },
     error(){
-      if(!this.location.locationKey && !this.location.locationName){
-        this.getIpAddress(true);
-      }else{
-        this.checkLocation();
-      }
+      this.$notify({type: "error", text: "Could not get location"})
+      !this.location.locationKey && !this.location.locationName ? this.getIpAddress(true) : this.checkLocation();
     }
   }
 }
 
-/*
-
-
-
-*/
 </script>

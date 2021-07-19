@@ -5,8 +5,12 @@
     --color-3: hsl(0, 0%, 40%);
     --border-color: hsl(0, 0%, 88%);
     --card-background: hsl(0, 0%, 93%);
+    --card-background-hover: hsl(0, 0%, 80%);
     --card-boxshadow: 0 0 30px 0 hsla(0, 0%, 50%, 0.10);
     --text-shadow: 0px 3px 3px hsla(0, 0%, 13%, 0.251);
+
+    --green: hsl(170, 100%, 30%);
+    --green-50: hsl(170, 100%, 30%, 50%);
 }
 
 .dark {
@@ -16,6 +20,7 @@
     --color-3: hsl(0, 0%, 60%);
     --border-color: hsl(0, 0%, 12%);
     --card-background: hsl(0, 0%, 7%);
+    --card-background-hover: hsl(0, 0%, 20%);
     --card-boxshadow: 0 0 30px 0 hsla(0, 0%, 0%, 0.10);
     --text-shadow: 0px 3px 3px hsla(0, 0%, 87%, 0.251);
 }
@@ -25,7 +30,7 @@
     padding: 0;
     border: 0;
     outline: 0;
-    font-family: "Nunito", sans-serif
+    font-family: "Nunito", sans-serif;
 }
 
 *, :after, :before {
@@ -33,7 +38,7 @@
 }
 
 :focus {
-    outline: 1px auto -webkit-focus-ring-color
+    outline: 1px auto var(--green);
 }
 
 body {
@@ -143,7 +148,7 @@ footer {
     transition: all .25s ease 0s;
 }
 
-.feature a:hover::after {
+.feature a:hover::after, .feature a:focus::after {
     width: 100%;
 }
 
@@ -271,13 +276,14 @@ footer {
 
 .search-input-holder{
     width: 90%;
-    margin: 10px auto;
+    margin: 0px auto;
     display: flex;
     background: var(--card-background);
     padding: 5px;
     border: 1px solid var(--border-color);
     border-radius: 20px;
     box-shadow: var(--card-boxshadow);
+    transition: all .25s ease 0s;
 }
 
 .search-input{
@@ -314,11 +320,28 @@ footer {
     border-bottom: 1px solid var(--border-color);
     user-select: none;
     cursor: pointer;
-    color: var(--color-2)
+    color: var(--color-2);
+    background: transparent;
+    font-size: 1rem;
+    font-weight: 300;
+    transition: all .25s ease 0s;
 }
+
+.search-result:hover, .search-result:focus{
+    background-color: var(--card-background-hover);
+    outline: none
+}
+
+.search-result:first-child{
+    border-top-left-radius: 18px;
+    border-top-right-radius: 18px;
+}
+
 
 .search-result:last-child{
     border-bottom: none;
+    border-bottom-left-radius: 18px;
+    border-bottom-right-radius: 18px;
 }
 
 .mode-icon svg{
@@ -361,7 +384,7 @@ input:autofill{
 }
 
 .my-notification.success {
-    background: hsl(170, 100%, 30%);
+    background: var(--green);
     border-left: 3px solid hsl(170, 70%, 20%)
 }
 
@@ -375,4 +398,34 @@ input:autofill{
     font-size: 1rem;
     text-align: center;
     font-weight: bold;
+}
+
+.accessibility-btn{
+    background-color: var(--card-background);
+    padding: 10px 20px;
+    margin: 20px;
+    border-radius: 20px;
+    color: var(--color);
+    font-weight: 600;
+    text-decoration: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateX(-150%);
+    transition: all .25s ease 0s;
+}
+
+.accessibility-btn:focus{
+    transform: translateX(0%);
+    box-shadow: 0 0 0 3px var(--green);
+    outline: none;
+}
+
+.searchPage{
+    padding-top: 10px;
+}
+
+.focus{
+    border-color: var(--green);
+    box-shadow: var(--card-boxshadow), 0 0 0 3px var(--green-50);
 }
