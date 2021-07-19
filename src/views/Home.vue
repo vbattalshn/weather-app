@@ -42,18 +42,19 @@ export default{
     }
   },
   mounted(){
-    if(!this.location.locationKey && !this.location.locationName){
-      this.getIpAddress(true);
-    }else{
-      if(this.weather.hourData != null && this.weather.hourData.Link.search(this.location.locationKey) == -1){
-        this.weather.hourData = null;
-        this.weather.fiveDayData = null;
-        this.getWeatherData();
-        this.get5DayWeatherData();
+    if(!this.location.search){
+      if(!navigator.geolocation){
+        if(!this.location.locationKey && !this.location.locationName){
+          this.getIpAddress(true);
+        }else{
+          this.checkLocation();
+        }
       }else{
-        this.getWeatherData();
-        this.get5DayWeatherData();
+        navigator.geolocation.getCurrentPosition(this.success, this.error)
       }
+    }else{
+      this.location.search = false;
+      this.checkLocation();
     }
   },
   methods: {
@@ -62,19 +63,32 @@ export default{
         .get("https://api.ipify.org?format=json")
         .then((Response) => {
           this.user.ipAddress = Response.data.ip;
-          if(param){this.getLocation()}
+          if(param){this.getIpLocation()}
         })
         .catch((error) => {
-          this.$notify({type: "error", text: "Location not deceted"})
+          this.$notify({type: "error", text: error})
         })
-
     },
-    getLocation(){
+    getIpLocation(){
       axios
         .get("http://dataservice.accuweather.com/locations/v1/cities/ipaddress?apikey=" + this.api.apiKey + "&q=" + this.user.ipAddress + "&language=" + this.api.lang + "&details=false")
         .then((Response) => {
           this.location.locationKey = Response.data.ParentCity.Key,
           this.location.locationName = Response.data.ParentCity.EnglishName
+          this.getWeatherData();
+          this.get5DayWeatherData();
+        })
+        .catch((error) => {
+          this.$notify({type: "error", text: error})
+        })
+    },
+    getMeridianLocation(){
+      axios
+        .get("http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=" + this.api.apiKey + "&q=" + this.location.latitude + "," + this.location.longitude + "&language=" + this.api.lang + "&details=false&toplevel=false")
+        .then((Response) => {
+          console.log(Response)
+          this.location.locationKey = Response.data.Key,
+          this.location.locationName = Response.data.LocalizedName
           this.getWeatherData();
           this.get5DayWeatherData();
         })
@@ -101,7 +115,37 @@ export default{
         .catch((error) => {
           this.$notify({type: "error", text: error})
         })
+    },
+    checkLocation(){
+      if(this.weather.hourData != null && this.weather.hourData.Link.search(this.location.locationKey) == -1){
+        this.weather.hourData = null;
+        this.weather.fiveDayData = null;
+        this.getWeatherData();
+        this.get5DayWeatherData();
+      }else{
+        this.getWeatherData();
+        this.get5DayWeatherData();
+      }
+    },
+    success(position){
+      console.log(position);
+      this.location.latitude = position.coords.latitude;
+      this.location.longitude = position.coords.longitude;
+      this.getMeridianLocation();
+    },
+    error(){
+      if(!this.location.locationKey && !this.location.locationName){
+        this.getIpAddress(true);
+      }else{
+        this.checkLocation();
+      }
     }
   }
 }
+
+/*
+
+
+
+*/
 </script>

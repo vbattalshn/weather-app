@@ -61,6 +61,7 @@ export default {
     changeLocation: function (Key ,LocalizedName){
       this.location.locationKey = Key,
       this.location.locationName = LocalizedName,
+      this.location.search = true;
       this.$cookies.set("locationKey", Key),
       this.$cookies.set("locationName", LocalizedName),
       this.$notify({type: "success", text: "Location changed"})

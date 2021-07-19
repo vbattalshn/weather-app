@@ -10,7 +10,8 @@ export default new Vuex.Store({
       locationKey: $cookies.get("locationKey") ? $cookies.get("locationKey") : null,
       locationName: $cookies.get("locationName") ? $cookies.get("locationName") : null,
       latitude: null,
-      longitude: null
+      longitude: null,
+      search: false
     },
     user: {
       ipAddress: null
@@ -21,7 +22,7 @@ export default new Vuex.Store({
       msg: "" 
     },
     api: {
-      apiKey: "Cb6aGGwClq4froGdp6NJv9r47hElMeaR",
+      apiKey: "vzSQAmYOlUjzGUEbipFtepO0DAuSivxX",
       lang: "en-en"
     },
     weather: {
