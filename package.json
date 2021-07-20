@@ -3,8 +3,8 @@
   "version": "0.4.5",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "serve": "npm run serve",
+    "build": "npm run build"
   },
   "dependencies": {
     "axios": "^0.21.1",
